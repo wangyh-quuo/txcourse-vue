@@ -1,0 +1,98 @@
+<template>
+  <div class="container">
+    <section class="recommend">
+      <h1 class="title">精选好课</h1>
+      <div class="category">
+        <div class="select-left">
+          <em class="select">分类</em>
+        </div>
+        <div class="select_right">
+          <ul class="category_list">
+            <li class="category_item">不限</li>
+            <li class="category_item">ios开发</li>
+            <li class="category_item">前端开发</li>
+            <li class="category_item">java开发</li>
+            <li class="category_item">java开发</li>
+            <li class="category_item">java开发</li>
+            <li class="category_item">java开发</li>
+          </ul>
+        </div>
+      </div>
+      <div class="category">
+        <em class="select">难度</em>
+        <div class="select_right">
+          <ul class="category_list">
+            <li class="category_item">不限</li>
+            <li class="category_item">基础</li>
+            <li class="category_item">进阶</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <course-list></course-list>
+  </div>
+</template>
+<script>
+import CourseList from "@/components/home/CourseList";
+export default {
+  name: "HomeRecommend",
+  components: {
+    CourseList
+  }
+};
+</script>
+<style lang="stylus">
+.container {
+  .title {
+    text-align: center;
+    font-size: 0.18rem;
+    color: #777;
+    font-weight: 4;
+    letter-spacing: 0.08rem;
+    line-height: 0.18rem;
+    height: 0.2rem;
+  }
+
+  .category {
+    display: flex;
+    line-height: 0.2rem;
+    height: 0.24rem;
+    padding-left: 0.1rem;
+    margin-top: 0.05rem;
+    color: #777;
+
+    .select-left {
+      position: relative;
+    }
+
+    .select {
+      font-style: normal;
+      font-size: 0.14rem;
+    }
+
+    .select_right {
+      flex: 1;
+      overflow-x: auto;
+      overflow-y: hidden;
+      line-height: 0.2rem;
+      margin-left: 0.3rem;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .select_right::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .category_list {
+    display: flex;
+    white-space: nowrap;
+    font-size: 0.14rem;
+
+    .category_item {
+      margin-right: 0.3rem;
+    }
+  }
+}
+</style>
