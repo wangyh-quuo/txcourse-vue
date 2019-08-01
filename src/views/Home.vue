@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <home-header></home-header>
+    <home-header>
+      <search></search>
+    </home-header>
     <swipper></swipper>
     <home-recommend></home-recommend>
     <tabbar></tabbar>
@@ -9,7 +11,8 @@
 
 <script>
 // @ is an alias to /src
-import HomeHeader from "@/components/home/Header";
+import HomeHeader from "@/components/common/Header";
+import search from "@/components/common/Search";
 import swipper from "@/components/common/Swipper";
 import HomeRecommend from "@/components/home/Recommend";
 import tabbar from "@/components/common/Tabbar";
@@ -20,7 +23,8 @@ export default {
     HomeHeader,
     swipper,
     HomeRecommend,
-    tabbar
+    tabbar,
+    search
   }
 };
 </script>

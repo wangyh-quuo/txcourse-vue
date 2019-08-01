@@ -3,24 +3,25 @@
     <div class="header_left">
       <router-link to="/" tag="span" class="logo"></router-link>
     </div>
-    <search class="search"></search>
+    <div class="header_right">
+      <slot></slot>
+    </div>
   </div>
 </template>
+
 <script>
-import search from "@/components/common/Search";
 export default {
-  name: "HomeHeader",
-  components: {
-    search
-  }
+  name: "header"
 };
 </script>
+
 <style lang="stylus" scoped>
 .header {
   display: flex;
   position: fixed;
   background: #fff;
   line-height: 0.54rem;
+  height: 0.54rem;
   z-index: 999;
   width: 100%;
 
@@ -39,7 +40,7 @@ export default {
     transform: translateY(0.14rem);
   }
 
-  .search {
+  .header_right {
     flex: 1;
   }
 }

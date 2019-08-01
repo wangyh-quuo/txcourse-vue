@@ -105,5 +105,9 @@ export default {
       line-height: 0.2rem;
     }
   }
+
+  .list:last-child {
+    padding-bottom: 0.5rem;
+  }
 }
 </style>
