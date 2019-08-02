@@ -1,16 +1,23 @@
 <template>
   <div>
-    <header>
-      <video-header>
+    <video-header>
+      <template #header_left>
+        <router-link to="/" tag="span" class="back">
+          <van-icon name="arrow-left" size="0.3rem" />
+        </router-link>
+      </template>
+
+      <template #header_right>
         <span style="color: #fff;">1.1JavaScript语法</span>
-      </video-header>
-    </header>
+        <van-icon class="user_avater" size="0.3rem" name="manager" />
+      </template>
+    </video-header>
     <div style="height: 0.54rem;"></div>
     <div class="container">
       <div class="video">
         <video class="video_src" src controls></video>
       </div>
-   </div>
+    </div>
 
     <van-tabs v-model="active">
       <van-tab title="介绍">
@@ -21,11 +28,10 @@
         <course-chapter></course-chapter>
       </van-tab>
     </van-tabs>
-
   </div>
 </template>
 <script>
-import VideoHeader from '@/components/course/video/VideoHeader'
+import VideoHeader from "@/components/common/Header";
 import CourseIntroduce from "@/components/course/CourseIntroduce";
 import CourseDiscuss from "@/components/course/CourseDiscuss";
 import CourseChapter from "@/components/course/CourseChapter";
@@ -41,9 +47,29 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.container{
-  background #000
+.header {
+  background: #000;
+  color: #fff;
+
+  .logo {
+    display: inline-block;
+    width: 0.26rem;
+    height: 0.26rem;
+    background: transparent;
+    transform: translateY(0.14rem);
+  }
+
+  .user_avater {
+    display: inline-block;
+    float: right;
+    transform: translateY(50%);
+  }
 }
+
+.container {
+  background: #000;
+}
+
 .video {
   max-width: 1200px;
   max-height: 625px;

@@ -4,10 +4,11 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 /* reset.css */
-import '@/assets/css/reset.css'
+import "@/assets/css/reset.css";
+import "@/assets/css/common.styl";
 /* vant-ui */
-import Vant  from 'vant';
-import 'vant/lib/index.css';
+import Vant from "vant";
+import "vant/lib/index.css";
 Vue.use(Vant);
 
 Vue.config.productionTip = false;

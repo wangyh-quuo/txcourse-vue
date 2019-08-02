@@ -1,12 +1,27 @@
 <template>
   <div class="title">
-    <div class="first_title">前沿</div>
-    <div class="first_title">前端</div>
-    <div class="first_title">后端</div>
-    <div class="first_title">移动</div>
-    <div class="first_title">云计算</div>
-    <div class="first_title">运维</div>
-    <div class="first_title">UI设计</div>
+    <div class="first_title">
+      <span class="tab_border">前沿</span>
+    </div>
+    <div class="first_title">
+      <span>前端</span>
+    </div>
+    <div class="first_title">
+      <span>后端</span>
+    </div>
+    <div class="first_title">
+      <span>移动</span>
+    </div>
+    <div class="first_title">
+      <span>云计算</span>
+    </div>
+    <div class="first_title">
+      <span>运维</span>
+    </div>
+    <div class="first_title">
+      <span>UI设计</span>
+    </div>
+    
   </div>
 </template>
 
@@ -21,11 +36,25 @@ export default {
   display: flex;
   width: 100%;
   color: #fff;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 
   .first_title {
     text-align: center;
     font-size: 0.14rem;
-    width: 14.2%;
+    width: 0.6rem;
+    margin: 0 0.2rem;
+
+    span {
+      display: inline-block;
+      padding: 0.12rem 0;
+      overflow: hidden;
+    }
   }
+}
+
+.title::-webkit-scrollbar {
+  display: none;
 }
 </style>

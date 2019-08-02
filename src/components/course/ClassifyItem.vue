@@ -26,7 +26,7 @@
       <li class="list_left">难度:</li>
       <li class="list_right">
         <ul>
-          <router-link class="item active">全部</router-link>
+          <router-link to="/courseList/1" tag="li" class="item active">全部</router-link>
           <router-link to="/courseList/1" tag="li" class="item">入门</router-link>
           <router-link to="/courseList/1" tag="li" class="item">初级</router-link>
           <router-link to="/courseList/1" tag="li" class="item">中级</router-link>
@@ -70,7 +70,6 @@ export default {
       padding: 0.2rem;
     }
   }
-
 }
 </style>
 

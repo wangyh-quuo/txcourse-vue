@@ -1,7 +1,12 @@
 <template>
   <div>
     <course-header>
-      <nav-more></nav-more>
+      <template #header_left>
+          <router-link to="/" tag="span" class="logo"></router-link>
+      </template>
+      <template #header_right>
+        <nav-more></nav-more>
+      </template>
     </course-header>
 
     <div style="height: 0.54rem;"></div>

@@ -16,7 +16,8 @@
           </p>
           <p>
             <van-icon name="certificate" size="20px" />
-            <span>注册登录</span>
+            <span v-if="!login">注册登录</span>
+            <span v-if="login">退出登录</span>
           </p>
         </div>
       </transition>
@@ -34,7 +35,8 @@ export default {
   name: "more",
   data() {
     return {
-      tabShow: false //是否显示tab
+      tabShow: false, //是否显示tab
+      login: false  //是否登录
     };
   },
   methods: {
@@ -47,9 +49,14 @@ export default {
 
 <style lang="stylus" scoped>
 .more {
-  float: right;
+  position: absolute;
   padding-right: 0.1rem;
+  right: 0
+  i {
+    transform: translateY(0.05rem)
+  }
 }
+
 
 .nav {
   position: fixed;

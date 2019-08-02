@@ -1,10 +1,10 @@
 <template>
   <div class="classify">
-    <div class="header">
+    <div class="bgheader">
       <header class="header_search">
         <search :inputBgColor="inputBgColor"></search>
-        <classify-title></classify-title>
       </header>
+    <classify-title></classify-title>
     </div>
     <classify-item></classify-item>
     <tabbar></tabbar>
@@ -34,7 +34,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 @import "~@/assets/css/variables.styl" 
-  .header
+  .bgheader
     width: 100%
     background-color: $bgColor;
     background-image: url('~@/assets/img/header.png');

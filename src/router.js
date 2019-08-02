@@ -5,6 +5,9 @@ import Classify from "./views/Classify";
 import ClassifyCourse from "./views/ClassifyCourse";
 import CourseDetail from "./views/CourseDetail";
 import Video from "./views/Video";
+import UserProfile from "./views/UserProfile";
+import Coupon from "./views/Coupon";
+import UserCourse from "./views/UserCourse";
 
 Vue.use(Router);
 
@@ -34,8 +37,23 @@ export default new Router({
     },
     {
       path: "/video/:videoId",
-      name: "vidoeo",
+      name: "video",
       component: Video
+    },
+    {
+      path: "/user",
+      name: "userProfile",
+      component: UserProfile
+    },
+    {
+      path: "/coupon",
+      name: "coupon",
+      component: Coupon
+    },
+    {
+      path: "/user/course",
+      name: "userCourse",
+      component: UserCourse
     }
   ]
 });

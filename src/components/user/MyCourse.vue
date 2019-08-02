@@ -1,14 +1,14 @@
 <template>
   <section class="course">
-    <router-link to="/course/1" tag="ul" class="list" v-for="item of 10" :key="item">
+    <router-link to="/video/1" tag="ul" class="list" v-for="item of 10" :key="item">
       <li class="item_left">
         <div class="item_img">
           <img class="course_img" src="@/assets/img/356.webp" />
         </div>
       </li>
       <li class="item_right">
-        <p class="course_title">微信小程序开发1asdasdasdasdasdas11</p>
-        <p class="course_price">免费</p>
+        <p class="course_title ellipse">微信小程序开发1asdasdasdasdasdas11</p>
+        <p class="course_record ellipse">学习至1-1javaScript深入浅出课程介绍</p>
       </li>
     </router-link>
   </section>
@@ -16,13 +16,12 @@
 
 <script>
 export default {
-  name: "CourseItem"
+  name: "MyCourse"
 };
 </script>
 
 <style lang="stylus" scoped>
 .course {
-  padding-top: 1rem;
 
   .list {
     display: flex;
@@ -49,14 +48,11 @@ export default {
       .course_title {
         font-size: 0.16rem;
         line-height: 0.3rem;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
       }
 
-      .course_price {
-        color: #23bbff;
-        font-size: 0.16rem;
+      .course_record {
+        color: #666
+        font-size: 0.12rem;
       }
     }
   }

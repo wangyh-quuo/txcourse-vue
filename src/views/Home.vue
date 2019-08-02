@@ -1,7 +1,13 @@
 <template>
   <div class="home">
     <home-header>
-      <search></search>
+      <template #header_left>
+        <router-link to="/" tag="span" class="logo"></router-link>
+      </template>
+
+      <template #header_right>
+        <search></search>
+      </template>
     </home-header>
     <swipper></swipper>
     <home-recommend></home-recommend>

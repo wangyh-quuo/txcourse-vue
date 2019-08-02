@@ -2,9 +2,15 @@
   <div>
     <header class="course_header">
       <course-header>
-        <search></search>
+        <template #header_left>
+          <router-link to="/" tag="span" class="logo"></router-link>
+        </template>
+        <template #header_right>
+           <search></search>
+        </template>
       </course-header>
       <drop-menu></drop-menu>
+      
     </header>
     <course-item></course-item>
   </div>
