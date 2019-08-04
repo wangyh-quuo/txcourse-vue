@@ -7,22 +7,24 @@
           <em class="select">分类</em>
         </div>
         <div class="select_right">
-          <ul class="category_list">
-            <li class="category_item">不限</li>
-            <li class="category_item">ios开发</li>
-            <li class="category_item">前端开发</li>
-            <li class="category_item">java开发</li>
-            <li class="category_item">java开发</li>
-            <li class="category_item">java开发</li>
-            <li class="category_item">java开发</li>
+          <ul class="category_list" @click="classify">
+            <li class="category_item" :class="[classifyIndex==key?'active':'']" :key="-1">不限</li>
+            <li
+              :class="[classifyIndex==data?'active':'']"
+              class="category_item"
+              v-for="item of classifyList"
+              :key="item.id"
+              :data="item.id"
+              v-text="item.name"
+            ></li>
           </ul>
         </div>
       </div>
       <div class="category">
         <em class="select">难度</em>
         <div class="select_right">
-          <ul class="category_list">
-            <li class="category_item">不限</li>
+          <ul class="category_list" @click="rank">
+            <li class="category_item active">不限</li>
             <li class="category_item">基础</li>
             <li class="category_item">进阶</li>
           </ul>
@@ -36,8 +38,27 @@
 import CourseList from "@/components/home/CourseList";
 export default {
   name: "HomeRecommend",
+  data() {
+    return {
+      classifyIndex: -1
+    };
+  },
+  props: {
+    classifyList: Array
+  },
   components: {
     CourseList
+  },
+  methods: {
+    //选择分类
+    classify(e) {
+      if (e.target.nodeName == "LI") {
+        this.classifyIndex = e.target.getAttribute("data");
+        console.log(this.classifyIndex);
+      }
+    },
+    //选择难度
+    rank() {}
   }
 };
 </script>
@@ -51,6 +72,7 @@ export default {
     letter-spacing: 0.08rem;
     line-height: 0.18rem;
     height: 0.2rem;
+    margin-top: 0.1rem;
   }
 
   .category {
@@ -68,6 +90,8 @@ export default {
     .select {
       font-style: normal;
       font-size: 0.14rem;
+      color: #333;
+      font-weight: 700;
     }
 
     .select_right {
@@ -94,5 +118,9 @@ export default {
       margin-right: 0.3rem;
     }
   }
+}
+
+.active {
+  color: #23bbff;
 }
 </style>

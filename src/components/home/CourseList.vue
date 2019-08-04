@@ -1,74 +1,46 @@
 <template>
   <section class="course">
     <ul class="list">
-      <li class="item">
+      <li class="item" v-for="item of recommendList" :key="item.id">
         <div class="item_img">
-          <img class="course_img" src="@/assets/img/356.webp" />
+          <img class="course_img" :src="item.courseImg" />
         </div>
-        <p class="course_title">微信小程序开发</p>
-        <p class="course_price">免费</p>
-      </li>
-      <li class="item">
-        <div class="item_img">
-          <img class="course_img" src="@/assets/img/356.webp" />
-        </div>
-        <p class="course_title">微信小程序开发</p>
-        <p class="course_price">￥.100.00</p>
-      </li>
-    </ul>
-    <ul class="list">
-      <li class="item">
-        <div class="item_img">
-          <img class="course_img" src="@/assets/img/356.webp" />
-        </div>
-        <p class="course_title">微信小程序开发</p>
-        <p class="course_price">免费</p>
-      </li>
-      <li class="item">
-        <div class="item_img">
-          <img class="course_img" src="@/assets/img/356.webp" />
-        </div>
-        <p class="course_title">微信小程序开发</p>
-        <p class="course_price">￥.100.00</p>
-      </li>
-    </ul>
-    <ul class="list">
-      <li class="item">
-        <div class="item_img">
-          <img class="course_img" src="@/assets/img/356.webp" />
-        </div>
-        <p class="course_title">微信小程序开发</p>
-        <p class="course_price">免费</p>
-      </li>
-      <li class="item">
-        <div class="item_img">
-          <img class="course_img" src="@/assets/img/356.webp" />
-        </div>
-        <p class="course_title">微信小程序开发</p>
-        <p class="course_price">￥.100.00</p>
-      </li>
-    </ul>
-    <ul class="list">
-      <li class="item">
-        <div class="item_img">
-          <img class="course_img" src="@/assets/img/356.webp" />
-        </div>
-        <p class="course_title">微信小程序开发</p>
-        <p class="course_price">免费</p>
-      </li>
-      <li class="item">
-        <div class="item_img">
-          <img class="course_img" src="@/assets/img/356.webp" />
-        </div>
-        <p class="course_title">微信小程序开发</p>
-        <p class="course_price">￥.100.00</p>
+        <p class="course_title" v-text="item.name"></p>
+        <p class="course_price" v-text="price(item)"></p>
       </li>
     </ul>
   </section>
 </template>
 <script>
 export default {
-  name: "CourseList"
+  name: "CourseList",
+  data() {
+    return {
+      recommendList: []
+    };
+  },
+  computed: {
+    price(item) {
+      return function(item) {
+        return item.free == 1 ? "免费" : `￥${item.price}`;
+      };
+    }
+  },
+  methods: {
+    getRecommendList() {
+      this.$get("/api/index/recommends")
+        .then(res => {
+          console.log(1);
+          this.recommendList = res.courseList;
+        })
+        .catch(error => {
+          console.log("course loading failure!");
+        });
+    }
+  },
+  mounted() {
+    this.getRecommendList();
+  }
 };
 </script>
 <style lang="stylus" scoped>
@@ -76,11 +48,14 @@ export default {
   margin-top: 0.05rem;
 
   .list {
-    display: flex;
+    width: 100%;
+    overflow: hidden;//清除浮动
+    padding-bottom: 0.5rem;
   }
 
   .item {
     width: 50%;
+    float: left;
 
     .item_img {
       padding: 0.1rem;
@@ -104,10 +79,6 @@ export default {
       font-size: 0.16rem;
       line-height: 0.2rem;
     }
-  }
-
-  .list:last-child {
-    padding-bottom: 0.5rem;
   }
 }
 </style>

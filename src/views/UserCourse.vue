@@ -8,7 +8,7 @@
       </template>
       <template #header_right>
         <span class="title">我参加的课程</span>
-        <nav-more class=""></nav-more>
+        <nav-more class></nav-more>
       </template>
     </course-header>
     <div style="padding-top: 0.54rem;"></div>
@@ -21,6 +21,7 @@
 import CourseHeader from "@/components/common/Header";
 import NavMore from "@/components/common/More";
 import MyCourse from "@/components/user/MyCourse";
+
 export default {
   name: "UserCourse",
   components: {

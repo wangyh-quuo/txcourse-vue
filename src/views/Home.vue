@@ -9,8 +9,8 @@
         <search></search>
       </template>
     </home-header>
-    <swipper></swipper>
-    <home-recommend></home-recommend>
+    <swipper :swipperList="swipperList"></swipper>
+    <home-recommend :classifyList="classifyList"></home-recommend>
     <tabbar></tabbar>
   </div>
 </template>
@@ -31,6 +31,36 @@ export default {
     HomeRecommend,
     tabbar,
     search
+  },
+  data() {
+    return {
+      swipperList: [],
+      classifyList: [],
+    };
+  },
+  methods: {
+    getSwipperList() {
+      this.$get("/api/index/swipper")
+        .then(res => {
+          this.swipperList = res.swipperList;
+        })
+        .catch(err => {
+          console.log("index swipper loading failure!");
+        });
+    },
+    getClassifyList() {
+      this.$get("/api/index/classify")
+        .then(res => {
+          this.classifyList = res.classifyList;
+        })
+        .catch(error => {
+          console.log("index classify loading failure!");
+        });
+    },
+  },
+  mounted() {
+    this.getClassifyList();
+    this.getSwipperList();
   }
 };
 </script>

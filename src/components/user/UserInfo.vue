@@ -2,14 +2,18 @@
   <div class="box">
     <img class="user_avater" src="@/assets/img/cat.jpeg" alt="">
     <div class="user_info">
-      <p class="user_name">用户12138</p>
+      <p class="user_name">{{user.userData.name}}</p>
       <p class="learn_time">学习时长 9分钟</p>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: "UserInfo"
+  name: "UserInfo",
+  computed: {
+    ...mapState(['user'])
+  },
 };
 </script>
 

@@ -36,7 +36,7 @@ import CourseIntroduce from "@/components/course/CourseIntroduce";
 import CourseDiscuss from "@/components/course/CourseDiscuss";
 import CourseChapter from "@/components/course/CourseChapter";
 export default {
-  name: "video",
+  name: "Video",
   components: {
     VideoHeader,
     CourseIntroduce,

@@ -18,9 +18,10 @@
       <list></list>
     </div>
     <div class="postion_bottom">
-      <van-button type="info" size="large">退出登录</van-button>
+      <van-button type="info" size="large" @click="logout">退出登录</van-button>
     </div>
   </div>
+  
 </template>
 <script>
 import ProfileHeader from "@/components/common/Header";
@@ -28,6 +29,8 @@ import NavMore from "@/components/common/More";
 import UserInfo from "@/components/user/UserInfo"
 import Group from "@/components/user/Group"
 import List from "@/components/user/List"
+
+import { mapActions } from "vuex";
 export default {
   name: "UserProfile",
   components: {
@@ -36,6 +39,14 @@ export default {
     UserInfo,
     Group,
     List
+  },
+  methods: {
+    ...mapActions(['clearUserData']),
+    //退出登录,回到首页
+    logout (){
+      this.clearUserData();
+      this.$router.push({name: "home"});
+    }
   }
 };
 </script>
