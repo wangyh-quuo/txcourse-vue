@@ -1,24 +1,18 @@
 <template>
   <div class="classify_item">
     <ul class="list">
-      <li class="list_left">前端开发:</li>
+      <li class="list_left">{{course.classifyItems.name}}:</li>
       <li class="list_right">
         <ul>
-          <router-link to="/courseList/1" tag="li" class="item active">全部</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">HTML/CSS</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">JavaScript</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">Vue.js</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">React.JS</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">Angular</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">Node.js</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">jQuery</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">Bootstrap</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">Sass/Less</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">WebApp</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">小程序</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">前端工具</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">Html5</router-link>
-          <router-link to="/courseList/1" tag="li" class="item">CSS3</router-link>
+          <router-link to="/courseList/-1" tag="li" class="item active">全部</router-link>
+          <router-link
+            :to="{name: 'courseList', params: {'classifyId': item.id}}"
+            tag="li"
+            class="item"
+            v-for="item of course.classifyItems.classifyItems"
+            :key="item.id"
+            v-text="item.name"
+          ></router-link>
         </ul>
       </li>
     </ul>
@@ -26,7 +20,7 @@
       <li class="list_left">难度:</li>
       <li class="list_right">
         <ul>
-          <router-link to="/courseList/1" tag="li" class="item active">全部</router-link>
+          <router-link to="/courseList/-1" tag="li" class="item active">全部</router-link>
           <router-link to="/courseList/1" tag="li" class="item">入门</router-link>
           <router-link to="/courseList/1" tag="li" class="item">初级</router-link>
           <router-link to="/courseList/1" tag="li" class="item">中级</router-link>
@@ -38,8 +32,19 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
-  name: "ClassifyItem"
+  name: "ClassifyItem",
+  computed: {
+    ...mapState(["course"])
+  },
+  methods: {
+    ...mapActions(["getClassifyItems"])
+  },
+  mounted() {
+    this.getClassifyItems();
+  }
 };
 </script>
 <style lang="stylus" scoped>
@@ -65,7 +70,7 @@ export default {
 
     .item {
       float: left;
-      font-size: 0.14rem;
+      font-size: 0.12rem;
       line-height: 0.3rem;
       padding: 0.2rem;
     }

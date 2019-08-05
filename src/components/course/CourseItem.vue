@@ -1,22 +1,49 @@
 <template>
   <section class="course">
-    <router-link to="/course/1" tag="ul" class="list" v-for="item of 10" :key="item">
+    <router-link
+      :to="{name: 'course',params: {'courseId': item.id}}"
+      tag="ul"
+      class="list"
+      v-for="item of course.courseList"
+      :key="item.id"
+    >
       <li class="item_left">
         <div class="item_img">
-          <img class="course_img" src="@/assets/img/356.webp" />
+          <img class="course_img" :src="item.courseImg" />
         </div>
       </li>
       <li class="item_right">
-        <p class="course_title">微信小程序开发1asdasdasdasdasdas11</p>
-        <p class="course_price">免费</p>
+        <p class="course_title" v-text="item.name"></p>
+        <p class="course_price" v-text="price(item)"></p>
+        <p class="course_learning">{{item.learning}}个人正在学习</p>
       </li>
     </router-link>
+    <loading @get-more="getMoreCourse"></loading>
   </section>
 </template>
 
 <script>
+import Loading from "@/components/common/Loading";
+import { mapState, mapActions } from "vuex";
 export default {
-  name: "CourseItem"
+  name: "CourseItem",
+  components: {
+    Loading
+  },
+  computed: {
+    ...mapState(["course", "loading"]),
+    price() {
+      return function(item) {
+        return item.free == 1 ? "免费" : `￥${item.price}`;
+      };
+    }
+  },
+  methods: {
+    ...mapActions(["getCourseListByCondition", "getMoreCourse"])
+  },
+  mounted() {
+    this.getCourseListByCondition({ classifyId: 1 });
+  }
 };
 </script>
 
@@ -57,6 +84,11 @@ export default {
       .course_price {
         color: #23bbff;
         font-size: 0.16rem;
+      }
+
+      .course_learning {
+        color: #666;
+        line-height: 0.2rem;
       }
     }
   }

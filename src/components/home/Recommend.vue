@@ -8,13 +8,12 @@
         </div>
         <div class="select_right">
           <ul class="category_list" @click="classify">
-            <li class="category_item" :class="[classifyIndex==key?'active':'']" :key="-1">不限</li>
+            <li :class="[classifyIndex==-1?'active':'','category_item']">不限</li>
             <li
-              :class="[classifyIndex==data?'active':'']"
-              class="category_item"
-              v-for="item of classifyList"
+              :class="[classifyIndex==item.id?'active':'','category_item']"
+              v-for="item of course.classifyList"
               :key="item.id"
-              :data="item.id"
+              :active="item.id"
               v-text="item.name"
             ></li>
           </ul>
@@ -24,9 +23,13 @@
         <em class="select">难度</em>
         <div class="select_right">
           <ul class="category_list" @click="rank">
-            <li class="category_item active">不限</li>
-            <li class="category_item">基础</li>
-            <li class="category_item">进阶</li>
+            <li
+              :class="[rankIndex==index?'active':'','category_item']"
+              v-for="(item,index) of rankArray"
+              :key="index"
+              :index="index"
+              v-text="item"
+            ></li>
           </ul>
         </div>
       </div>
@@ -36,29 +39,45 @@
 </template>
 <script>
 import CourseList from "@/components/home/CourseList";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "HomeRecommend",
   data() {
     return {
-      classifyIndex: -1
+      classifyIndex: -1,
+      rankIndex: 0,
+      rankArray: ["不限", "基础", "进阶"]
     };
-  },
-  props: {
-    classifyList: Array
   },
   components: {
     CourseList
   },
+  computed: {
+    ...mapState(["course"]) //state课程模块
+  },
   methods: {
+    ...mapActions(["getClassifyList", "getRecommendList"]),
     //选择分类
     classify(e) {
       if (e.target.nodeName == "LI") {
-        this.classifyIndex = e.target.getAttribute("data");
-        console.log(this.classifyIndex);
+        const active = e.target.getAttribute("active") || -1;
+        this.classifyIndex = active;
+        //请求该分类下的推荐课程
+        this.getRecommendList({ id: active });
       }
     },
     //选择难度
-    rank() {}
+    rank(e) {
+      if (e.target.nodeName == "LI") {
+        this.rankIndex = e.target.getAttribute("index");
+        //请求该难度下的推荐课程
+        this.getRecommendList({ rank: this.rankIndex });
+      }
+    }
+  },
+  mounted() {
+    //获取分类数据
+    this.getClassifyList();
   }
 };
 </script>

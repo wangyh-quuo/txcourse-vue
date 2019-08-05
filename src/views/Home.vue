@@ -10,7 +10,8 @@
       </template>
     </home-header>
     <swipper :swipperList="swipperList"></swipper>
-    <home-recommend :classifyList="classifyList"></home-recommend>
+    <home-recommend></home-recommend>
+    <div style="padding-bottom: 0.5rem;"></div>
     <tabbar></tabbar>
   </div>
 </template>
@@ -45,21 +46,11 @@ export default {
           this.swipperList = res.swipperList;
         })
         .catch(err => {
-          console.log("index swipper loading failure!");
-        });
-    },
-    getClassifyList() {
-      this.$get("/api/index/classify")
-        .then(res => {
-          this.classifyList = res.classifyList;
-        })
-        .catch(error => {
-          console.log("index classify loading failure!");
+          console.log(err,"index swipper loading failure!");
         });
     },
   },
   mounted() {
-    this.getClassifyList();
     this.getSwipperList();
   }
 };

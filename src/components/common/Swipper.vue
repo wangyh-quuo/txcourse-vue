@@ -18,7 +18,6 @@ export default {
 <style lang="stylus" scoped>
 .swipper {
   padding-top: 0.54rem;
-  height: 1.49rem;
 }
 
 .swipper_img {

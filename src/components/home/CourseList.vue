@@ -1,42 +1,36 @@
 <template>
   <section class="course">
     <ul class="list">
-      <li class="item" v-for="item of recommendList" :key="item.id">
+      <li class="item" v-for="item of course.recommendList" :key="item.id">
         <div class="item_img">
-          <img class="course_img" :src="item.courseImg" />
+          <img v-show="!loading" class="course_img" :src="item.courseImg" />
+          <van-loading v-if="loading" type="spinner" color="#1989fa" />
         </div>
         <p class="course_title" v-text="item.name"></p>
         <p class="course_price" v-text="price(item)"></p>
       </li>
+      <loading @get-more="getMore"></loading>
     </ul>
   </section>
 </template>
 <script>
+import { mapState, mapActions } from "vuex";
+import Loading from "@/components/common/Loading";
 export default {
   name: "CourseList",
-  data() {
-    return {
-      recommendList: []
-    };
+  components: {
+    Loading
   },
   computed: {
-    price(item) {
+    price() {
       return function(item) {
         return item.free == 1 ? "免费" : `￥${item.price}`;
       };
-    }
+    },
+    ...mapState(["course", "loading"])
   },
   methods: {
-    getRecommendList() {
-      this.$get("/api/index/recommends")
-        .then(res => {
-          console.log(1);
-          this.recommendList = res.courseList;
-        })
-        .catch(error => {
-          console.log("course loading failure!");
-        });
-    }
+    ...mapActions(["getRecommendList", "getMore"])
   },
   mounted() {
     this.getRecommendList();
@@ -49,8 +43,7 @@ export default {
 
   .list {
     width: 100%;
-    overflow: hidden;//清除浮动
-    padding-bottom: 0.5rem;
+    overflow: hidden; // 清除浮动
   }
 
   .item {
