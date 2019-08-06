@@ -1,17 +1,15 @@
 <template>
   <section class="introduce">
-    <p class="description">
-      课程简介:由浅入深学习JS语言特性，且解析JS常见误区,从入门到掌握
-    </p>
+    <p class="description">课程简介:{{course.course.introduce}}</p>
     <ul class="detail">
       <li class="item">
-        <span>难度：中级</span>
+        <span>难度：{{rank(course.course.rank)}}</span>
       </li>
       <li class="item">
-        <span>时长：5h28m</span>
+        <span>时长：{{course.course.time}}</span>
       </li>
       <li class="item">
-        <span>人数：260020</span>
+        <span>人数：{{course.course.learning}}</span>
       </li>
       <li class="item">
         <span>评分：9.6</span>
@@ -20,8 +18,28 @@
   </section>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
-  name: "CourseIntroduce"
+  name: "CourseIntroduce",
+  computed: {
+    ...mapState(["course"]),
+    rank() {
+      return status => {
+        switch (status) {
+          case 0:
+            return "入门";
+          case 1:
+            return "初级";
+          case 2:
+            return "中极";
+          case 3:
+            return "高级";
+          default:
+            break;
+        }
+      };
+    }
+  }
 };
 </script>
 

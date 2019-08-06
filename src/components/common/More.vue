@@ -5,19 +5,19 @@
         <van-icon name="more-o" size="20px" />
       </div>
       <transition name="tab">
-        <div class="nav" v-show="tabShow">
+        <div class="nav" v-show="tabShow" @click="tabShow=false">
           <p>
             <van-icon name="wap-home" size="20px" />
-            <span>回到首页</span>
+            <router-link to="/" tag="span">回到首页</router-link>
           </p>
           <p>
             <van-icon name="contact" size="20px" />
-            <span>个人中心</span>
+            <router-link to="/user" tag="span">个人中心</router-link>
           </p>
           <p>
             <van-icon name="certificate" size="20px" />
-            <span v-if="!login">注册登录</span>
-            <span v-if="login">退出登录</span>
+            <router-link v-if="!isLogin()" to="/login" tag="span">注册登录</router-link>
+            <span v-if="isLogin()" @click="logout">退出登录</span>
           </p>
         </div>
       </transition>
@@ -31,6 +31,7 @@
   </div>
 </template>
 <script>
+import { mapState,mapActions } from "vuex";
 export default {
   name: "more",
   data() {
@@ -39,9 +40,21 @@ export default {
       login: false  //是否登录
     };
   },
+  computed: {
+    ...mapState(['user'])
+  },
   methods: {
+    ...mapActions(['clearUserData']),
     show() {
       this.tabShow = !this.tabShow;
+    },
+    isLogin() {
+      return this.user.auth.loggedIn().result;
+    },
+    //退出登录,回到首页
+    logout (){
+      this.clearUserData();
+      this.$router.push({name: "home"});
     }
   }
 };

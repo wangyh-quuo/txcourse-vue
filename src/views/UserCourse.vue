@@ -2,9 +2,7 @@
   <div>
     <course-header>
       <template #header_left>
-        <router-link to="/" tag="span" class="back">
-          <van-icon name="arrow-left" size="0.2rem" />
-        </router-link>
+        <back></back>
       </template>
       <template #header_right>
         <span class="title">我参加的课程</span>
@@ -19,6 +17,7 @@
 </template>
 <script>
 import CourseHeader from "@/components/common/Header";
+import Back from "@/components/common/Back";
 import NavMore from "@/components/common/More";
 import MyCourse from "@/components/user/MyCourse";
 
@@ -26,6 +25,7 @@ export default {
   name: "UserCourse",
   components: {
     CourseHeader,
+    Back,
     NavMore,
     MyCourse
   }

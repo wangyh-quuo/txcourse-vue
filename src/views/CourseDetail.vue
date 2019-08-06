@@ -2,7 +2,7 @@
   <div>
     <course-header>
       <template #header_left>
-          <router-link to="/" tag="span" class="logo"></router-link>
+        <router-link to="/" tag="span" class="logo"></router-link>
       </template>
       <template #header_right>
         <nav-more></nav-more>
@@ -14,13 +14,15 @@
       <div class="cover"></div>
     </div>
 
-    <van-tabs v-model="active">
+    <van-tabs>
       <van-tab title="介绍">
         <course-introduce></course-introduce>
         <course-discuss></course-discuss>
-        <router-link to="/video/1">
+        <router-link 
+          :to="{name:'video', params:{videoId: course.course.chapterList[0].sectionList[0].sectionId}}"
+        >
           <van-button type="info" size="large" class="begin-learn">开始学习</van-button>
-        </router-link>
+        </router-link> -->
       </van-tab>
       <van-tab title="章节">
         <course-chapter></course-chapter>
@@ -35,6 +37,7 @@ import NavMore from "@/components/common/More";
 import CourseIntroduce from "@/components/course/CourseIntroduce";
 import CourseDiscuss from "@/components/course/CourseDiscuss";
 import CourseChapter from "@/components/course/CourseChapter";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "CourseDetail",
   components: {
@@ -43,6 +46,18 @@ export default {
     CourseIntroduce,
     CourseDiscuss,
     CourseChapter
+  },
+  computed: {
+    ...mapState(["course"])
+  },
+  methods: {
+    ...mapActions(["getCourseDetail"])
+  },
+  beforeRouteEnter(to, from, next) {
+    // ...
+    next(vm => {
+      vm.getCourseDetail(vm.$router.history.current.params.courseId);
+    });
   }
 };
 </script>

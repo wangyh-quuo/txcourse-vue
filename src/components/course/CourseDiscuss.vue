@@ -1,18 +1,20 @@
 <template>
   <section class="course_discuss">
     <h1 class="discuss_title">学员讨论</h1>
-    <ul class="discuss_list" v-for="item of 5" :key="item">
+    <ul
+      class="discuss_list"
+      v-for="question of course.course.questionList"
+      :key="question.questionId"
+    >
       <li class="discuss_left">
         <img class="avater" src="@/assets/img/cat.jpeg" alt />
       </li>
       <li class="discuss_right">
-        <p class="author">用户A</p>
-        <p class="question">
-          刚看了书，楼上说的极是，不能使用对象字面量创建原型方法，这样会重写原型链。
-        </p>
+        <p class="author">{{question.user.name}}</p>
+        <p class="question">{{question.content}}</p>
         <p class="last">
-          <span class="qtime">15点48分</span>
-          <span class="answer">x回答</span>
+          <span class="qtime">{{question.time}}</span>
+          <span class="answer">{{question.answer}}回答</span>
         </p>
       </li>
     </ul>
@@ -22,8 +24,12 @@
   </section>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
-  name: "CourseDiscuss"
+  name: "CourseDiscuss",
+  computed: {
+    ...mapState(["course"])
+  }
 };
 </script>
 

@@ -1,14 +1,20 @@
 <template>
   <section class="course">
     <ul class="list">
-      <li class="item" v-for="item of course.recommendList" :key="item.id">
+      <router-link
+        :to="{name: 'course', params: {courseId: item.id}}"
+        tag="li"
+        class="item"
+        v-for="item of course.recommendList"
+        :key="item.id"
+      >
         <div class="item_img">
           <img v-show="!loading" class="course_img" :src="item.courseImg" />
           <van-loading v-if="loading" type="spinner" color="#1989fa" />
         </div>
         <p class="course_title" v-text="item.name"></p>
         <p class="course_price" v-text="price(item)"></p>
-      </li>
+      </router-link>
       <loading @get-more="getMore"></loading>
     </ul>
   </section>

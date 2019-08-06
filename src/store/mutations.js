@@ -13,5 +13,8 @@ export default {
   },
   moreData(state){
     state.noMore = false;
+  },
+  setCurrent(state,param){
+    state.currentSection = param;
   }
 };

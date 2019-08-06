@@ -487,6 +487,131 @@ Mock.mock(/\/api\/courseList/, "get", {
     }
   ]
 });
+
+//课程详细数据
+Mock.mock(/\/api\/course\/[\d+]/, "get", {
+  ret: 0,
+  course: {
+    id: "@increment",
+    name: "JavaScript深入浅出",
+    free: 1,
+    price: 0,
+    introducea: "由浅入深学习JS语言特性，且解析JS常见误区,从入门到掌握",
+    "learning|100-10000": 10000,
+    rank: 2,
+    time: "5h18",
+    chapterList: [
+      {
+        chapterName: "第一章 数据类型",
+        sectionList: [
+          {
+            sectionId: "@increment",
+            sectionName: "1-1JavaScript深入浅出课程介绍"
+          },
+          {
+            sectionId: "@increment",
+            sectionName: "1-2JavaScript数据类型"
+          },
+          {
+            sectionId: "@increment",
+            sectionName: "1-3JavaScript隐式转换"
+          },
+          {
+            sectionId: "@increment",
+            sectionName: "1-4JavaScript包装对象"
+          },
+          {
+            sectionId: "@increment",
+            sectionName: "1-5JavaScript类型检测"
+          }
+        ]
+      },
+      {
+        chapterName: "第二章 表达式和运算符",
+        sectionList: [
+          {
+            sectionId: "@increment",
+            sectionName: "2-1JavaScript表达式"
+          },
+          {
+            sectionId: "@increment",
+            sectionName: "2-2JavaScript运算符"
+          }
+        ]
+      },
+      {
+        chapterName: "第三章 语句",
+        sectionList: [
+          {
+            sectionId: "@increment",
+            sectionName: "3-1JavaScript基本语句"
+          },
+          {
+            sectionId: "@increment",
+            sectionName: "3-2JavaScript循环条件语句"
+          },
+          {
+            sectionId: "@increment",
+            sectionName: "3-3JavaScript严格模式"
+          }
+        ]
+      },
+      {
+        chapterName: "第四章 对象",
+        sectionList: [
+          {
+            sectionId: "@increment",
+            sectionName: "4-1JavaScript对象概述"
+          },
+          {
+            sectionId: "@increment",
+            sectionName: "4-2JavaScript创建对象、原型链"
+          },
+          {
+            sectionId: "@increment",
+            sectionName: "4-3JavaScript对象属性"
+          }
+        ]
+      }
+    ],
+    questionList: [
+      {
+        qusetionId: "@increment",
+        user: {
+          avater: "",
+          name: '@string("lower", 5)'
+        },
+        time: "@time(HH:mm)",
+        content:
+          "刚看了书，楼上说的极是，不能使用对象字面量创建原型方法，这样会重写原型链。",
+        "answer|1-100": 50
+      },
+      {
+        qusetionId: "@increment",
+        user: {
+          avater: "",
+          name: '@string("lower", 5)'
+        },
+        time: "@time(HH:mm)",
+        content:
+          "刚看了书，楼上说的极是，不能使用对象字面量创建原型方法，这样会重写原型链。",
+        "answer|1-100": 50
+      },
+      {
+        qusetionId: "@increment",
+        user: {
+          avater: "",
+          name: '@string("lower", 5)'
+        },
+        time: "@time(HH:mm)",
+        content:
+          "刚看了书，楼上说的极是，不能使用对象字面量创建原型方法，这样会重写原型链。",
+        "answer|1-100": 50
+      }
+    ]
+  }
+});
+
 //我的课程
 Mock.mock(/\/api\/myCourse[\S|\s*]/, "get", {
   ret: 0,

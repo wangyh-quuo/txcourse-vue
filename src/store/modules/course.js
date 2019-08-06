@@ -2,14 +2,16 @@ import {
   getClassifyList,
   getClassifyItems,
   getRecommendList,
-  getCourseListByCondition
+  getCourseListByCondition,
+  getCourseDetail
 } from "@/api/api";
 
 const state = {
   classifyList: [],
   classifyItems: [],
   recommendList: [],
-  courseList: []
+  courseList: [],
+  course: {}
 };
 const mutations = {
   setClassifyList(state, payload) {
@@ -29,6 +31,36 @@ const mutations = {
   },
   addCourseList(state, payload) {
     state.courseList.push(...payload);
+  },
+  orderCourseByCondition(state, payload) {
+    switch (payload) {
+      case 0:
+        state.courseList.sort((a, b) => {
+          return a.id - b.id;
+        });
+        break;
+      case 1:
+        state.courseList.sort((a, b) => {
+          return b.learning - a.learning;
+        });
+        break;
+      case 2:
+        state.courseList.sort((a, b) => {
+          return a.price - b.price;
+        });
+        break;
+      case 3:
+        state.courseList.sort((a, b) => {
+          return b.price - a.price;
+        });
+        break;
+
+      default:
+        break;
+    }
+  },
+  setCourse(state, payload) {
+    state.course = payload;
   }
 };
 const actions = {
@@ -86,6 +118,29 @@ const actions = {
         context.commit("overLoading");
       });
     }
+  },
+  //课程详情数据
+  getCourseDetail(context, param) {
+    getCourseDetail(param)
+      .then(res => {
+        context.commit("setCourse", res);
+      })
+      .catch(err => {
+        console.log(err, "course loading failure!");
+      });
+  },
+  //打开课程视频
+  getVideo(context, param) {
+    if (param != null) {
+      context.commit("setCurrent", param);
+    }
+    getCourseDetail(param)
+      .then(res => {
+        context.commit("setCourse", res);
+      })
+      .catch(err => {
+        console.log(err, "course loading failure!");
+      });
   }
 };
 export default {

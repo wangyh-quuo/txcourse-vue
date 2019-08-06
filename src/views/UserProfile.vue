@@ -2,9 +2,7 @@
   <div class="user_profile">
     <profile-header>
       <template #header_left>
-        <router-link to="/" tag="span" class="back">
-          <van-icon name="arrow-left" size="0.2rem" />
-        </router-link>
+        <back></back>
       </template>
 
       <template #header_right>
@@ -25,6 +23,7 @@
 </template>
 <script>
 import ProfileHeader from "@/components/common/Header";
+import Back from "@/components/common/Back";
 import NavMore from "@/components/common/More";
 import UserInfo from "@/components/user/UserInfo"
 import Group from "@/components/user/Group"
@@ -35,6 +34,7 @@ export default {
   name: "UserProfile",
   components: {
     ProfileHeader,
+    Back,
     NavMore,
     UserInfo,
     Group,

@@ -1,21 +1,46 @@
 <template>
   <div class="chapter">
-    <section class="course_chapter" v-for="item of 5" :key="item">
-      <div class="chapter_title">第{{ item }}章:xxxxxx</div>
+    <section
+      class="course_chapter"
+      v-for="chapter of course.course.chapterList"
+      :key="chapter.chapterName"
+    >
+      <div class="chapter_title">{{chapter.chapterName}}</div>
       <ul class="chapter_section">
-        <router-link to="/video/1" tag="li" class="section_item" v-for="item of 5" :key="item">
+        <!-- <router-link
+        :to="{name: 'video' , params: { videoId: section.sectionId }}"-->
+        <li
+          class="section_item"
+          :class="[currentSection==section.sectionId?'active':'']"
+          v-for="section of chapter.sectionList"
+          :key="section.sectionId"
+          @click="openSection(section.sectionId)"
+        >
           <van-icon name="play-circle-o" size="0.14rem" class="item_left" />
-          {{ item }}
+          {{ section.sectionName }}
           <van-icon name="circle" class="item_right" />
-        </router-link>
+          <!-- </router-link> -->
+        </li>
       </ul>
     </section>
   </div>
 </template>
 
 <script>
+import { mapState,mapMutations } from "vuex";
 export default {
-  name: "CourseChpter"
+  name: "CourseChpter",
+  computed: {
+    ...mapState(["course","currentSection"])
+  },
+  methods: {
+    ...mapMutations(['setCurrent']),
+    openSection(param) {
+      this.setCurrent(param);
+      this.$emit('section-id',param);
+      this.$router.push({ name: "video", params: { videoId: param } });
+    }
+  }
 };
 </script>
 
@@ -36,6 +61,7 @@ export default {
     line-height: 0.4rem;
 
     .section_item {
+      display: block;
       margin: 0.1rem 0.2rem;
       color: #666;
       background: #fff;
@@ -50,6 +76,10 @@ export default {
         padding: 0 0.1rem;
         transform: translateY(100%);
       }
+    }
+
+    .active {
+      color: #65cdff;
     }
   }
 }

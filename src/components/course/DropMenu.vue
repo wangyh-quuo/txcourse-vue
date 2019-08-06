@@ -14,10 +14,10 @@
     <transition name="order">
       <div class="order_box" v-show="isOrder">
         <ul>
-          <li class="order_item">综合排序</li>
-          <li class="order_item">人气排序</li>
-          <li class="order_item">价格最低</li>
-          <li class="order_item">价格最高</li>
+          <li class="order_item" @click="orderCourse(0)">综合排序</li>
+          <li class="order_item" @click="orderCourse(1)">人气排序</li>
+          <li class="order_item" @click="orderCourse(2)">价格最低</li>
+          <li class="order_item" @click="orderCourse(3)">价格最高</li>
         </ul>
       </div>
     </transition>
@@ -26,60 +26,100 @@
     <div class="filter_box" v-show="isFilter">
       <div>
         <h1 class="filter_title">方向</h1>
-        <div>
-          <van-button type="default">前端</van-button>
-          <van-button type="default">后端</van-button>
-          <van-button type="default">移动</van-button>
-          <van-button type="default">云计算</van-button>
-          <van-button type="default">运维</van-button>
-          <van-button type="default">UI设计</van-button>
+        <div @click="changeClassify">
+          <van-button
+            plain
+            :type="condition.directions==direction.id?'info':'default'"
+            v-for="direction of course.classifyList"
+            :key="direction.id"
+            :id="direction.id"
+          >{{direction.name}}</van-button>
         </div>
       </div>
       <div>
         <h1 class="filter_title">类别</h1>
         <div>
-          <van-button type="default">前端</van-button>
-          <van-button type="default">后端</van-button>
-          <van-button type="default">移动</van-button>
-          <van-button type="default">云计算</van-button>
-          <van-button type="default">运维</van-button>
-          <van-button type="default">UI设计</van-button>
+          <van-button
+            :type="condition.classifys==index?'info':'default'"
+            v-for="(classify,index) of course.classifyItems.classifyItems"
+            :key="classify.id"
+            :id="classify.id"
+            @click="condition.classifys=index"
+          >{{classify.name}}</van-button>
         </div>
       </div>
       <div>
         <h1 class="filter_title">难度</h1>
         <div>
-          <van-button type="default">入门</van-button>
-          <van-button type="default">初级</van-button>
-          <van-button type="default">中极</van-button>
-          <van-button type="default">高级</van-button>
+          <van-button
+            :type="condition.ranks==index?'info':'default'"
+            v-for="(rank,index) of rankList"
+            :key="index"
+            @click="condition.ranks=index"
+          >{{ rank }}</van-button>
         </div>
       </div>
       <div class="confirm">
-        <van-button type="default">取消</van-button>
-        <van-button type="info">确认</van-button>
+        <van-button @click="isFilter=false" type="default">取消</van-button>
+        <van-button @click="submit" type="info">确认</van-button>
       </div>
     </div>
   </section>
 </template>
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   name: "DropMenu",
   data() {
     return {
       isOrder: false, //是否选中排序
-      isFilter: false
+      isFilter: false,
+      rankList: ["入门", "初级", "中级", "高级"],
+      condition: {
+        directions: 1,
+        classifys: 0,
+        ranks: 0
+      }
     };
   },
+  computed: {
+    ...mapState(["course"])
+  },
   methods: {
+    ...mapMutations(["orderCourseByCondition"]),
+    ...mapActions([
+      "getClassifyList",
+      "getClassifyItems",
+      "getCourseListByCondition"
+    ]),
     order() {
       //出现下拉选择
       this.isOrder = !this.isOrder;
     },
+    //课程排序
+    orderCourse(status) {
+      this.isOrder = false;
+      this.orderCourseByCondition(status);
+    },
     courseFilter() {
       this.isOrder = false;
       this.isFilter = !this.isFilter;
+    },
+    changeClassify(e) {
+      if (e.target.nodeName == "BUTTON") {
+        const id = e.target.getAttribute("id");
+        this.condition.directions = id;
+        this.getClassifyItems({ id: id });
+      }
+    },
+    submit() {
+      this.getCourseListByCondition(this.condition);
+      this.isFilter = false;
     }
+  },
+  mounted() {
+    this.getClassifyList();
+    this.getClassifyItems();
   }
 };
 </script>
@@ -142,7 +182,8 @@ export default {
 
     .confirm {
       width: 100%;
-      button{
+
+      button {
         width: 40%;
       }
     }

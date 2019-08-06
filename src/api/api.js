@@ -66,3 +66,14 @@ export const getCourseListByCondition = params => {
       console.log("course loading failure!");
     });
 };
+//
+//课程详情数据
+export const getCourseDetail = param => {
+  return get(`/api/course/${param}`)
+    .then(res => {
+      return res.course;
+    })
+    .catch(err => {
+      console.log(err, "course loading failure!");
+    });
+};
