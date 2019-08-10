@@ -8,6 +8,7 @@ import Video from "./views/Video";
 import UserProfile from "./views/UserProfile";
 import Coupon from "./views/Coupon";
 import UserCourse from "./views/UserCourse";
+import UserQuestion from "./views/UserQuestion";
 import Auth from "./views/Auth";
 import store from "./store/store";
 
@@ -68,6 +69,14 @@ const router = new Router({
         requireAuth: true //该路由需要登陆
       },
       component: UserCourse
+    },
+    {
+      path: "/user/question",
+      name: "userQuestion",
+      meta: {
+        requireAuth: true //该路由需要登陆
+      },
+      component: UserQuestion
     },
     {
       path: "/login",

@@ -2,9 +2,7 @@
   <div class="bgColor_body">
     <coupon-header>
       <template #header_left>
-        <router-link to="/" tag="span" class="back">
-          <van-icon name="arrow-left" size="0.2rem" />
-        </router-link>
+        <back></back>
       </template>
       <template #header_right>
         <span class="title">我的优惠券</span>
@@ -30,6 +28,7 @@
 </template>
 <script>
 import CouponHeader from "@/components/common/Header";
+import Back from "@/components/common/Back";
 const coupon = {
   available: 1,
   condition: "无使用门槛\n最多优惠12元",
@@ -44,7 +43,8 @@ const coupon = {
 export default {
   name: "coupon",
   components: {
-    CouponHeader
+    CouponHeader,
+    Back
   },
   data() {
     return {

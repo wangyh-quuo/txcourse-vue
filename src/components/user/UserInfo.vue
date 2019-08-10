@@ -3,7 +3,7 @@
     <img class="user_avater" src="@/assets/img/cat.jpeg" alt="">
     <div class="user_info">
       <p class="user_name">{{user.userData.name}}</p>
-      <p class="learn_time">学习时长 9分钟</p>
+      <p class="learn_time">学习时长 {{user.userData.learning}}分钟</p>
     </div>
   </div>
 </template>

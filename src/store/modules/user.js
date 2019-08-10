@@ -1,16 +1,17 @@
+import { getUserInfo } from "@/api/api";
 const getUserData = () => {
   try {
-    return JSON.parse(sessionStorage.getItem("userInfo")) || {}
+    return JSON.parse(sessionStorage.getItem("userInfo")) || {};
   } catch (error) {
-    return {}
+    return {};
   }
-}
+};
 const state = {
   //用户登录状态
   auth: {
     //登录认证
     loggedIn() {
-      if (Object.keys(state.userData).length>0) {
+      if (Object.keys(state.userData).length > 0) {
         //TODO:根据该信息查找，信息是否正确
         if (true) {
           return { result: 1, data: 0, msg: "" };
@@ -23,7 +24,7 @@ const state = {
     }
   },
   //用户数据
-  userData: getUserData(),
+  userData: getUserData()
 };
 const getters = {
   //登录状态
@@ -42,9 +43,11 @@ const mutations = {
 };
 const actions = {
   //用户登录
-  setUserData(context, res) {
-    sessionStorage.setItem("userInfo", res);
-    context.commit("setUserData", res);
+  setUserData(context, param) {
+    return getUserInfo(param).then(res => {
+      sessionStorage.setItem("userInfo", res);
+      context.commit("setUserData", res);
+    });
   },
   //退出登录
   clearUserData(context) {

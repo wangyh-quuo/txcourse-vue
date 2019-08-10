@@ -1,8 +1,22 @@
 <template>
   <div class="login">
     <van-cell-group>
-      <van-field v-model="phone" label="+86" placeholder="请输入手机号" />
-      <van-field v-model="sms" center clearable label="短信验证码" placeholder="请输入短信验证码">
+      <van-field
+        v-model="phone"
+        label="+86"
+        placeholder="请输入手机号"
+        :error-message="errorPhone"
+        @input="checkPhone"
+        maxlength="11"
+      />
+      <van-field
+        v-model="sms"
+        center
+        clearable
+        label="短信验证码"
+        placeholder="请输入短信验证码"
+        :error-message="errorMsm"
+      >
         <van-button slot="button" size="small" type="primary">发送验证码</van-button>
       </van-field>
     </van-cell-group>
@@ -21,24 +35,39 @@ export default {
   data() {
     return {
       phone: "",
-      sms: ""
+      sms: "",
+      errorPhone: "",
+      errorMsm: ""
     };
   },
   methods: {
-    ...mapActions(['setUserData']),
+    ...mapActions(["setUserData"]),
+    //手机格式校验
+    checkPhone() {
+      if (!this.phone) {
+        this.errorPhone = "手机号不能为空";
+      } else {
+        this.errorPhone = "";
+        if (!this.phone.match(/1[^0-2][0-9]{9}/)) {
+          this.errorPhone = "手机号格式有误";
+        }
+      }
+    },
     login() {
       if (this.phone != "" && this.sms != "") {
-        //TODO: 发送登录请求,得到用户信息
-        const user = {
-          name: "用户12138"
-        };
-        this.setUserData(user);
-        console.log(this.$store)
-        //登录成功后跳转到登录前的那个页面
-        const redirect = decodeURIComponent(
-          this.$router.history.current.query.redirect || "/"
-        ); //这里query对象被放在了history对象的current对象中
-        this.$router.push({ path: redirect });
+        //校验通过
+        if(this.errorPhone == ""){
+          //TODO: 发送登录请求,得到用户信息
+          this.setUserData({ phone: this.phone, sms: this.sms }).then(() => {
+            //登录成功后跳转到登录前的那个页面
+            const redirect = decodeURIComponent(
+              this.$router.history.current.query.redirect || "/"
+            ); //这里query对象被放在了history对象的current对象中
+            this.$router.push({ path: redirect });
+          });
+        }
+      } else {
+        //错误提示
       }
     }
   }

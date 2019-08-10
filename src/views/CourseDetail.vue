@@ -18,11 +18,7 @@
       <van-tab title="介绍">
         <course-introduce></course-introduce>
         <course-discuss></course-discuss>
-        <router-link 
-          :to="{name:'video', params:{videoId: course.course.chapterList[0].sectionList[0].sectionId}}"
-        >
-          <van-button type="info" size="large" class="begin-learn">开始学习</van-button>
-        </router-link> -->
+        <van-button type="info" size="large" class="begin-learn" @click="startLearn">开始学习</van-button>
       </van-tab>
       <van-tab title="章节">
         <course-chapter></course-chapter>
@@ -51,7 +47,23 @@ export default {
     ...mapState(["course"])
   },
   methods: {
-    ...mapActions(["getCourseDetail"])
+    ...mapActions(["getCourseDetail"]),
+    //添加课程学习，如果课程为免费直接学习，付费则添加到购物车
+    startLearn() {
+      if (this.course.course.price == 0) {
+        this.$router.push({
+          name: "video",
+          params: {
+            videoId: this.course.course.chapterList[0].sectionList[0].sectionId
+          }
+        });
+      } else {
+        //TODO: 添加至购物车
+        this.$router.push({
+          name: "cart"
+        });
+      }
+    }
   },
   beforeRouteEnter(to, from, next) {
     // ...

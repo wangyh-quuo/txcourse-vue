@@ -1,13 +1,16 @@
-# install dependencies
+#### install dependencies
+```
 npm install
-
-# serve with hot reload at localhost:8080
+```
+#### serve with hot reload at localhost:8080
+```
 npm run serve
-
-# build for production with minification
+```
+#### build for production with minification
+```
 npm run build
-
-# 文件目录
+```
+#### 文件目录
 ```
 |-api
 |   - api.js            --Axios请求
@@ -52,8 +55,37 @@ npm run build
 |       - course.js   --课程模块状态管理
 |       - user.js     --用户模块状态管理
 |   mutations.js
-|   state.js
-|   store.js
+|   state.js          --state
+|   store.js          --导出store
 |
 |
 ```
+#### 简述
+做该项目是为了练习vue,将这段时间学习总结一下。使用vue实现视频学习网站,仿照腾讯课堂实现一些功能。
+#### 功能实现
+##### 首页
+- 1.swipper轮播
+- 2.课程方向展示,切换课程方向展示不同的课程列表
+- 3.下滑加载更多课程
+##### 课程分类
+- 1.课程方向导航
+- 2.切换课程分类
+##### 课程列表
+- 1.展示课程列表
+- 2.条件筛选,排序展示
+- 3.下滑加载更多课程
+##### 课程详细
+- 1.展示课程的介绍和章节
+- 2.展示课程的用户问题讨论
+- 3.加入学习
+##### 用户
+- 1.用户登录
+- 2.我的课程
+
+#### 总结:
+1. 熟悉了vue2.0的使用
+2. 使用VantUI的部分组件
+3. 使用Vuex来对数据状态管理,更好的来维护操作数据
+4. 使用mockjs模拟后台数据
+5. 将axios异步请求接口统一放入文件，便于管理
+6. 熟悉路由钩子的用法

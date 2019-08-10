@@ -637,6 +637,48 @@ Mock.mock(/\/api\/myCourse[\S|\s*]/, "get", {
   ]
 });
 
+//我的信息
+Mock.mock(/\/api\/user/, "post", {
+  ref: 0,
+  userInfo: {
+    id: "@increment",
+    name: "用户12138",
+    learning: 9
+  }
+});
+//我的提问
+Mock.mock(/\/api\/question/, "get",{
+  ret: 0,
+  questionList: [
+    {
+      id: 1,
+      questionContent: "各位大神们这个符号怎么打出来呀<>",
+      time: "19:01",
+      bestAnswer: {
+        id: 1,
+        answerContent: "切换英文输入法 然后按住shitf键加 M键旁边的按钮就是“<”号 ",
+        time: "19:01",
+      },
+      answerList: [
+        {
+          id: 1,
+          answerContent: "切换英文输入法 然后按住shitf键加 M键旁边的按钮就是“<”号 ",
+          time: "19:01",
+        },
+        {
+          id: 2,
+          answerContent: "切换英文输入法 然后按住shitf键加 M键旁边的按钮就是“<”号 ",
+          time: "19:01",
+        },
+        {
+          id: 3,
+          answerContent: "切换英文输入法 然后按住shitf键加 M键旁边的按钮就是“<”号 ",
+          time: "19:01",
+        }
+      ]
+    }
+  ]
+})
 //延时100-500s请求到数据
 Mock.setup({
   timeout: "100-500"

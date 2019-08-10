@@ -77,3 +77,11 @@ export const getCourseDetail = param => {
       console.log(err, "course loading failure!");
     });
 };
+//用户信息
+export const getUserInfo = param =>{
+  return post("/api/user",param).then(res=>{
+    return res.userInfo;
+  }).catch(err => {
+    console.log(err, "user login failure!");
+  });
+}
