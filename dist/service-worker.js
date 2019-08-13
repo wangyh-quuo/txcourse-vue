@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.afc784185fbdc333832a34bdfd7c5bc3.js"
+  "precache-manifest.6ca231baf2ab1c718f78eab9a6faabab.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "txcourse-vue"});
