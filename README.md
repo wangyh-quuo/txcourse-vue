@@ -10,7 +10,7 @@ npm run serve
 ```
 npm run build
 ```
-[演示] (https://wangyh-quuo.github.io/txcourse-vue/dist/#/)
+[演示](https://wangyh-quuo.github.io/txcourse-vue/dist/#/)
 #### 文件目录
 ```
 |-api
